@@ -1,6 +1,16 @@
 local api = vim.api
+local win, buf
 
 local M = {}
+
+local function has_value(tab, val)
+  for _, value in ipairs(tab) do
+    if value == val then
+      return true
+    end
+  end
+  return false
+end
 
 local function validate(path)
   if vim.fn.executable("hurl") == 0 then
@@ -42,7 +52,7 @@ local function exec_hurl(path)
   local win_width = math.ceil(width * 0.5)
   local row = math.ceil(height - win_height)
   local col = math.ceil(width - win_width)
-  
+
   local opts = {
     style = "minimal",
     relative = "editor",
@@ -70,11 +80,15 @@ end
 function M.hurl(file)
   local current_win = vim.fn.win_getid()
 
-  local path = validate(file)
-  if path == nil then
-    return
+  if current_win == win then
+    M.close_window()
+  else
+    local path = validate(file)
+    if path == nil then
+      return
+    end
+    exec_hurl(path)
   end
-  exec_hurl(file)
 end
 
 return M
