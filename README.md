@@ -2,6 +2,8 @@
 
 neovim plugin for intergating with [hurl](https://hurl.dev/)
 
+EA stage: There are many [arguments](https://hurl.dev/docs/man-page.html) for hurl, and I have no good idea how to deal with it right now...
+
 ## Install
 
 1. Install `hurl` and make it in your `$PATH`
@@ -31,11 +33,15 @@ neovim plugin for intergating with [hurl](https://hurl.dev/)
 I recommend add the mapping to your init file.
 
 ```
-noremap <leader>p :Glow<CR>
+noremap <leader>p :Hurl<CR>
 ```
 
 or you can manaully execute the hurl by
 
 ```vim
-:Hurl [path-to-md-file]
+:Hurl [path-to-hurl-file]
 ```
+
+## Inspiration
+
+Thanks to [glow.nvim](https://github.com/ellisonleao/glow.nvim)
